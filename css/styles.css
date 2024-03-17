@@ -1,0 +1,75 @@
+body {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #CBE9BF;
+    color: #000;
+    font-family: Arial, sans-serif;
+}
+
+header nav ul {
+    display: flex;
+    justify-content: flex-end;
+    list-style-type: none;
+    padding: 0;
+}
+
+header nav ul li {
+    margin-left: 20px;
+}
+
+#intro {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+}
+
+#intro img {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    margin-right: 20px;
+}
+
+.project {
+    width: 200px; /* Adjust based on your preference for square size */
+    height: 200px;
+    background-size: cover;
+    position: relative;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden; /* Ensures that nothing spills out of the box */
+}
+
+.project-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(128, 128, 128, 0.5); /* Grey transparent background */
+    color: white;
+    text-align: center; /* Center the text horizontally */
+    padding: 5px 0; /* Adjust padding to your liking for optimal text placement */
+}
+
+.project-info a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px; /* Adjust font size to your liking */
+}
+
+.project:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 6px 10px rgba(0,0,0,0.15);
+}
+
+body.dark-mode {
+    background-color: #333;
+    color: #FFF;
+}
+
+.dark-mode .project a {
+    background: rgba(255,255,255,0.2);
+    color: #FFF;
+}
