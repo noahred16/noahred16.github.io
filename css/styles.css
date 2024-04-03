@@ -8,9 +8,9 @@
     --dark-text-color: #FFF;
 }
 
-html {
+/* html {
     background-color: var(--secondary-background-color);
-}
+} */
 
 html::-webkit-scrollbar {
     display: none;
