@@ -5,9 +5,15 @@ Personal GitHub Page to showcase some open source projects, host a blog, or even
 ## Link to GitHub Page
 [noahred16.github.io](https://noahred16.github.io/)
 
+## Inspo
+- https://igrek51.github.io/
+
 ## Getting Started
 - Test with an index.php file
 - Add links and pics/vids to showcase
+
+## Run locally
+- python -m http.server
 
 ```
 your-github-username.github.io/
