@@ -14,7 +14,9 @@ void variableEllipse(int x, int y, int px, int py) {
   float hueValue = millis() % 255;
   // Use fill() to color the inside of the ellipse and stroke() for the border
 //   fill(hueValue, 255, 255, 127); // The last value (127) controls the transparency
-  stroke(hueValue, 255, 255); // You can adjust or remove this if you don't want an outline
-  strokeWeight(5); // Adjust the thickness of the outline
-  ellipse(x, y, speed, speed);
+  if (mousePressed == true) {
+    stroke(hueValue, 255, 255); // You can adjust or remove this if you don't want an outline
+    strokeWeight(5); // Adjust the thickness of the outline
+    ellipse(x, y, speed, speed);
+  }
 }
