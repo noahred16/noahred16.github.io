@@ -1,4 +1,17 @@
-:root {
+body {
+    line-height: 1.4;
+    font-size: 16px;
+    padding: 0 10px;
+    margin: 50px auto;
+    max-width: 650px;
+}
+
+#maincontent {
+    max-width: 42em;
+    margin: 15 auto;
+}
+
+/* :root {
     --background-color: #CBE9BF;
     --secondary-background-color: #FFF;
     --text-color: #000000;
@@ -8,9 +21,9 @@
     --dark-text-color: #FFF;
 }
 
-/* html {
+ html {
     background-color: var(--secondary-background-color);
-} */
+} 
 
 html::-webkit-scrollbar {
     display: none;
@@ -38,11 +51,11 @@ header nav ul li {
 }
 
 nav#main-nav a {
-    /* color: white; Text color */
-    text-decoration: none; /* Removes the default underline */
+     color: white; Text color 
+    text-decoration: none;  Removes the default underline 
     font-size: 1.2em;
     position: relative;
-    transition: color 0.3s; /* Smooth transition for text color */
+    transition: color 0.3s;  Smooth transition for text color 
 }
 
 nav#main-nav a::before {
@@ -52,7 +65,7 @@ nav#main-nav a::before {
     height: 2px;
     bottom: -5px;
     left: 0;
-    background-color: #FFF; /* Underline color */
+    background-color: #FFF;  Underline color 
     visibility: hidden;
     transform: scaleX(0);
     transition: all 0.3s ease-in-out 0s;
@@ -63,9 +76,9 @@ nav#main-nav a:hover::before {
     transform: scaleX(1);
 }
 
-/* Targeting links within the header specifically */
-header nav#main-nav a:link, /* unvisited links */
-header nav#main-nav a:visited { /* visited links */
+ Targeting links within the header specifically 
+header nav#main-nav a:link,  unvisited links 
+header nav#main-nav a:visited {  visited links 
     color: var(--text-color);
 }
 
@@ -89,14 +102,14 @@ header nav#main-nav a:visited { /* visited links */
 }
 
 .project {
-    width: 200px; /* Adjust based on your preference for square size */
+    width: 200px;  Adjust based on your preference for square size 
     height: 200px;
     background-size: cover;
     position: relative;
     margin-bottom: 20px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    overflow: hidden; /* Ensures that nothing spills out of the box */
+    overflow: hidden;  Ensures that nothing spills out of the box 
 }
 
 .project-info {
@@ -104,16 +117,16 @@ header nav#main-nav a:visited { /* visited links */
     bottom: 0;
     left: 0;
     width: 100%;
-    background: rgba(128, 128, 128, 0.5); /* Grey transparent background */
+    background: rgba(128, 128, 128, 0.5);  Grey transparent background 
     color: white;
-    text-align: center; /* Center the text horizontally */
-    padding: 5px 0; /* Adjust padding to your liking for optimal text placement */
+    text-align: center;  Center the text horizontally 
+    padding: 5px 0;  Adjust padding to your liking for optimal text placement 
 }
 
 .project-info a {
     color: white;
     text-decoration: none;
-    font-size: 16px; /* Adjust font size to your liking */
+    font-size: 16px;  Adjust font size to your liking 
 }
 
 .project:hover {
@@ -131,13 +144,11 @@ body.dark-mode {
     color: #FFF;
 }
 
-/* head links */
-.dark-mode header nav#main-nav a:link, /* unvisited links */
-.dark-mode header nav#main-nav a:visited { /* visited links */
+.dark-mode header nav#main-nav a:link, 
+.dark-mode header nav#main-nav a:visited { 
     color: var(--dark-text-color);
 }
 
-/* html background */
 .dark-mode html {
     background-color: var(--dark-secondary-background-color);
-}
+} */
