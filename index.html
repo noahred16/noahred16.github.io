@@ -1,64 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Noah Red Smith's Portfolio</title>
-    <link rel="stylesheet" href="css/styles.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/processing.js/1.6.6/processing.min.js" integrity="sha512-lbO95HE52QWwrDVEaDJmW9Xr8UIfMpRFT3akB8ett7lGfWsrGKz07L6wfwnF3KJ3T4a8cZupAKoI9Q2jH+0QIA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Gabarito" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/styles.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/processing.js/1.6.6/processing.min.js"
+        integrity="sha512-lbO95HE52QWwrDVEaDJmW9Xr8UIfMpRFT3akB8ett7lGfWsrGKz07L6wfwnF3KJ3T4a8cZupAKoI9Q2jH+0QIA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <title>Noah Smith</title>
 </head>
+
 <body>
-    <header>
-        <nav id="main-nav">
-            <ul>
-                <li><a href="#work">Work</a></li>
-                <li><a href="#school">School</a></li>
-                <li><a href="#game">Game</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li>
-                    <div id="theme-toggle">🌙</div>
-                </li>
-            </ul>
-        </nav>
-    </header>
-    <main>
-        <section id="intro">
-            <!-- <img src="assets/images/noah_profile.png" alt="Noah Red Smith"> -->
-            <div>
-                <h1>Noah Red Smith</h1>
-                <p>Software developer and MS CS student at NEU.</p>
+    <div class="my-container my-centered">
+        <div class="my-card">
+            <img class="my-profile" src="assets/images/noah_profile.png" alt="Noah Smith">
+            <h1 class="my-name">Noah Smith</h1>
+            <p class="my-blurb">Software Engineer<br>CABEM Technologies</p>
+            <!-- <p class="my-blurb">MS in CS<br>Northeastern University</p> -->
+            <p class="my-blurb">nosmith16 at gmail.com</p>
+            <div class="portal alumni-logos">
+                <a href="mailto:nosmith16@gmail.com" class="my-link"><i class="fa fa-envelope"
+                        aria-hidden="true"></i></a>
+                <a href="https://www.linkedin.com/in/noah-red-smith/" class="my-link"><i class="fa fa-linkedin"
+                        aria-hidden="true"></i></a>
+                <a href="http://www.github.com/noahred16" class="my-link"><i class="fa fa-github"
+                        aria-hidden="true"></i></a>
+                <!-- <a href="https://scholar.google.com/citations?user=some-day"><i class="ai ai-google-scholar" aria-hidden="true"></i></a> -->
+                <!-- <a href="http://www.twitter.com/nah"><i class="fa fa-twitter" aria-hidden="true"></i></a> -->
+                <!-- <a href="noah-smith-resume.pdf"><i class="fa fa-file"></i></a> -->
+                <img src="assets/images/uf_logo.png" alt="University of Florida B.S. in Computer Science"
+                    title="University of Florida: B.S. in Computer Science" />
+                <img src="assets/images/neu_logo.png" alt="Northeastern University"
+                    title="Northeastern University: M.S. in Computer Science" />
             </div>
-        </section>
-        <section id="work">
-            <h2>Work</h2>
-            <p>Currently working at CABEM Technologies, focusing on innovative software solutions.</p>
-        </section>
-        <section id="commands">
-            <h2>Git Commands</h2>
-            <p>Here are some useful Git commands:</p>
-            <ul>
-                <li>git reset --soft HEAD~1</li>
+        </div>
+    </div>
+    <div class="my-tile-container">
+        <div class="my-tile my-card">
+            <h2 class="my-subtitle">NEU ML Projects</h2>
+            <p class="my-text">As part of my Master's program, had the opportunity to use Northeastern's computing cluster and work on a variety of machine learning projects.</p>
+            <ul class="my-text">
+                <li><a href="https://github.com/noahred16/NBA-ML" class="my-link">NBA-ML</a> - Predicting NBA Game
+                    Outcomes Using Team and Player Statistics with RNNs</li>
+                <li><a href="https://github.com/noahred16/mental-health-sentiment-analysis" class="my-link">Mental
+                        Health Sentiment Analysis</a> - Sentiment analysis of mental health-related text data</li>
+                <li><a href="https://github.com/noahred16/DeepTeeth" class="my-link">DeepTeeth</a> - A deep learning
+                    model for teeth abnormalities classification</li>
             </ul>
-        </section> 
-        <section id="school">
-            <h2>School</h2>
-            <p>Attending Northeastern University for my MS in Computer Science. Alumnus of the University of Florida with a BS in CS.</p>
-        </section>
-        <section id="game">
-            <h2>Processing code here</h2>
-            <canvas data-processing-sources="processing/test.pde"></canvas>
-            <canvas id="processing-canvas"></canvas>
-        </section>
-        <section id="projects">
-            <h2>Projects</h2>
-            <div class="project" style="background-image: url('assets/images/soccer.png');">
-                <a href="https://nameless-castle-47546.herokuapp.com/">Soccer Game</a>
-            </div>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2024 Noah Red Smith</p>
-    </footer>
-    <script src="js/script.js"></script>
+            <a href="https://github.com/noahred16" class="btn btn-primary">See Repos</a>
+        </div>
+        <div class="my-tile my-card">
+            <h2 class="my-subtitle">Pente ai</h2>
+            <p class="my-text">AlphaZero-Style Reinforcement Learning Engine for Pente/Gomoku.</p>
+            <p class="my-text">I also play Pente at <a href="https://www.pente.org" class="my-link">pente.org</a> under
+                the username "noahred16".</p>
+            <img src="assets/images/pente_game.gif" alt="Pente ai Game" />
+            <a href="https://github.com/noahred16/AlphaPente" class="btn btn-primary">View Project</a>
+        </div>
+        <div class="my-tile my-card">
+            <h2 class="my-subtitle">Tennis Court Reservation System</h2>
+            <p class="my-text">Developed a custom court reservation system for The Racquet Club of St. Pete for managing
+                their daily court scheduling. It is a mobile friendly web app with live activity notifications, built
+                using Vue.js and Laravel. Managed user and court data for over 500 members with a PostgreSQL database
+                and deployed using git and Heroku.</p>
+            <img src="assets/images/tennis_calendar.png" alt="Tennis Court Reservation System" />
+            <a href="https://github.com/noahred16/reserve-racquet-club" class="btn btn-primary">View Project</a>
+        </div>
+        <div class="my-tile my-card">
+            <canvas id="processing-canvas" data-processing-sources="processing/color-wave.pde"></canvas>
+        </div>
+        <div class="my-tile my-card">
+            <canvas id="processing-canvas" data-processing-sources="processing/laser-fireworks.pde"></canvas>
+        </div>
+        <div class="my-tile my-card">
+            <canvas id="processing-canvas" data-processing-sources="processing/racecar-figure8.pde"></canvas>
+        </div>
+    </div>
+
 </body>
+
 </html>
