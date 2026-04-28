@@ -1,0 +1,94 @@
+Helpful commands:
+
+git reset --soft HEAD~1
+
+ssh -L 6006:localhost:6006 AWS-Noah-Dev
+
+
+# TMUX COMMANDS:
+tmux ls
+tmux new -s claude
+tmux attach -t claude
+tail -f ~/...
+exit: ctrl-b d
+switch session: ctrl + s
+view mode: ctrl + [
+split vertically: ctrl-b %
+split horizontally: ctrl-b "
+close pane: ctrl + x
+
+# CLAUDE
+claude
+claude --resume
+claude -w feature-branch
+
+# PYTHON VIRTUAL ENV:
+python -m venv venv
+source venv/bin/activate
+deactivate
+pip install -r requirements.txt
+pip freeze > requirements.txt
+
+# WSL Tabs
+Switch to the next tab: Ctrl + Tab
+Switch to a specific tab by number: Ctrl + Alt + [tab_number] (e.g., Ctrl + Alt + 1 for the first tab)
+
+# Git Worktrees
+git worktree add -b new-feature-name ../feature-directory
+git worktree add -b promising-moves ../pente-promising
+git worktree remove ../hotfix-branch-folder
+git worktree list
+
+
+
+
+
+########################################## WORK ##########################################
+git reset --soft HEAD~1
+git commit --amend --no-edit
+
+htop
+"@cabem/grud": "file:/home/cabemns/modules/grud",
+
+ps aux | grep php
+
+
+# connect
+redis-cli -h ue1-t-lsp-elasticache-ya2zdk.serverless.use1.cache.amazonaws.com -p 6379 --tls
+
+# redis commands
+# For Redis Lists (FIFO queues):
+LLEN queuename     # Get the length of the queue
+LRANGE queuename 0 -1    # View all items in the queue
+LRANGE queuename 0 9     # View first 10 items
+
+# To safely close vscode processes
+pkill -f vscode-server
+
+# Stop mysql
+sudo systemctl stop mysql
+
+
+# git submodule
+git submodule update --init
+git submodule update --remote
+
+
+# great console debugger
+setTimeout(() => {
+  debugger;
+}, 900);
+
+## TMUX COMMANDS
+tmux ls
+tmux attach -t SESSION_NAME
+tmux new -s lsp
+switch between sessions: ctrl + b + s 
+rename session: ctrl + b + $
+
+# close mysql
+sudo systemctl stop mysql
+sudo systemctl status mysql
+
+# jql
+project="Loan Servicing Platform" and fixVersion=26.01.02 AND "Git Branch[Labels]" != "patch/26.01.02"
