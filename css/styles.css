@@ -269,3 +269,56 @@ body {
   border-radius: 2px;
 }
 .card.expanded .divider { background: rgba(255,255,255,0.3); }
+
+/* ── TOOLBAR CARD ── */
+.card {
+  overflow: hidden;
+}
+
+.card-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #ccd6d0;
+  margin: -24px -20px 16px;
+  padding: 8px 8px 8px 14px;
+}
+
+.card-toolbar-title {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--green-dark);
+}
+
+.card-toolbar .expand-btn {
+  position: static;
+  background: rgba(0,0,0,0.08);
+  color: var(--green-dark);
+}
+
+.card-toolbar .expand-btn:hover {
+  background: rgba(0,0,0,0.18);
+}
+
+.card.expanded .card-toolbar {
+  background: rgba(0,0,0,0.2);
+}
+
+.card.expanded .card-toolbar-title {
+  color: var(--text-on-green);
+}
+
+.card.expanded .card-toolbar .expand-btn {
+  background: rgba(0,0,0,0.25);
+  color: var(--green-pale);
+}
+
+/* ── PROCESSING CANVAS ── */
+.card canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  outline: none;
+}

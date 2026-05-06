@@ -15,7 +15,7 @@ float mx, my;
 void setup() {
   size(290, 290);
   colorMode(RGB, 255);
-  background(158, 173, 161); // RGB for #9eada1
+  background(216, 243, 220); // RGB for #d8f3dc
   colorMode(HSB, 360, 100, 100, 1);
   fireworks = new ArrayList<Firework>();
   particles = new ArrayList<Particle>();
@@ -28,7 +28,7 @@ void draw() {
   
   // Create trailing effect with semi-transparent #9eada1 background
   colorMode(RGB, 255);
-  fill(158, 173, 161, 80); // #9eada1 with higher alpha for faster fading
+  fill(216, 243, 220, 80); // #d8f3dc with higher alpha for faster fading
   noStroke();
   rect(0, 0, width, height);
   colorMode(HSB, 360, 100, 100, 1);

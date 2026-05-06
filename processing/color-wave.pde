@@ -1,12 +1,12 @@
 void setup() {
-  background(158, 173, 161); // RGB for #9eada1
+  background(216, 243, 220); // RGB for #d8f3dc
   size(290, 290);
   frameRate(30);
   noStroke();
 }
 
 void draw() {
-  background(158, 173, 161); // RGB for #9eada1
+  background(216, 243, 220); // RGB for #d8f3dc
   float barheight = 0;
   for (float i = 0; i < 1; i += 1 / 16.0) {
     fill(255, 0, 0, 150);
