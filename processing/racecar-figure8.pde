@@ -17,7 +17,7 @@ void setup() {
 }
 
 void draw() {
-  background(158, 173, 161); // #9eada1
+  background(216, 243, 220); // #d8f3dc
   
   // Draw the figure-8 track
   drawTrack();

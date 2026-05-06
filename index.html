@@ -86,43 +86,50 @@
     </div>
 
     <div class="card" data-id="3">
-      <button class="expand-btn" aria-label="Expand" onclick="toggle(3)">
-        <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M1 5V1h4M9 1h4v4M13 9v4H9M5 13H1V9"/>
-        </svg>
-      </button>
-      <div class="card-tag">Writing</div>
-      <h2>Notes & Essays</h2>
-      <div class="divider"></div>
-      <p class="card-body">Placeholder text for the Writing section. Link to a blog, newsletter, or just describe the topics you like thinking and writing about.</p>
+      <div class="card-toolbar">
+        <span class="card-toolbar-title">Color Wave</span>
+        <button class="expand-btn" aria-label="Expand" onclick="toggle(3)">
+          <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M1 5V1h4M9 1h4v4M13 9v4H9M5 13H1V9"/>
+          </svg>
+        </button>
+      </div>
+      <div class="card-body">
+        <canvas data-processing-sources="processing/color-wave.pde"></canvas>
+      </div>
     </div>
 
     <div class="card" data-id="4">
-      <button class="expand-btn" aria-label="Expand" onclick="toggle(4)">
-        <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M1 5V1h4M9 1h4v4M13 9v4H9M5 13H1V9"/>
-        </svg>
-      </button>
-      <div class="card-tag">Interests</div>
-      <h2>Off the Clock</h2>
-      <div class="divider"></div>
-      <p class="card-body">Placeholder text for the Interests section. Share hobbies, obsessions, or things you're curious about outside of work — books, music, sport, etc.</p>
+      <div class="card-toolbar">
+        <span class="card-toolbar-title">Laser Fireworks</span>
+        <button class="expand-btn" aria-label="Expand" onclick="toggle(4)">
+          <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M1 5V1h4M9 1h4v4M13 9v4H9M5 13H1V9"/>
+          </svg>
+        </button>
+      </div>
+      <div class="card-body">
+        <canvas data-processing-sources="processing/laser-fireworks.pde"></canvas>
+      </div>
     </div>
 
     <div class="card" data-id="5">
-      <button class="expand-btn" aria-label="Expand" onclick="toggle(5)">
-        <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M1 5V1h4M9 1h4v4M13 9v4H9M5 13H1V9"/>
-        </svg>
-      </button>
-      <div class="card-tag">Contact</div>
-      <h2>Get in Touch</h2>
-      <div class="divider"></div>
-      <p class="card-body">Placeholder text for the Contact section. Add an email address, LinkedIn, GitHub, or however you prefer people reach you.</p>
+      <div class="card-toolbar">
+        <span class="card-toolbar-title">Racecar Figure-8</span>
+        <button class="expand-btn" aria-label="Expand" onclick="toggle(5)">
+          <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M1 5V1h4M9 1h4v4M13 9v4H9M5 13H1V9"/>
+          </svg>
+        </button>
+      </div>
+      <div class="card-body">
+        <canvas data-processing-sources="processing/racecar-figure8.pde"></canvas>
+      </div>
     </div>
 
   </div>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/processing.js/1.6.6/processing.min.js" integrity="sha512-lbO95HE52QWwrDVEaDJmW9Xr8UIfMpRFT3akB8ett7lGfWsrGKz07L6wfwnF3KJ3T4a8cZupAKoI9Q2jH+0QIA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="js/script.js"></script>
 
 </body>
