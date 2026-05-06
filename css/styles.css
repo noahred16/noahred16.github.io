@@ -1,114 +1,174 @@
-canvas#processing-canvas {
-    width: 290px;
-    height: 290px;
-    display: block;
-    margin: 0 auto;
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --green-dark:   #1a4731;
+  --green-mid:    #2d6a4f;
+  --green-bright: #40916c;
+  --green-light:  #b7e4c7;
+  --green-pale:   #d8f3dc;
+  --white:        #ffffff;
+  --text-on-green: #f0faf3;
+  --box-w: 350px;
+  --gap: 20px;
+  --max-cols: 3;
 }
 
-a:focus,
-canvas:focus {
-    outline: none;
-    box-shadow: none;
-}
-
-html,
 body {
-    margin: 0;
-    width: 100%;
-    height: 100%;
+  background: var(--white);
+  font-family: 'DM Mono', monospace;
+  min-height: 100vh;
+  padding: 40px 16px 60px;
 }
 
-.my-profile {
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 20px;
+/* ── HEADER ── */
+.header-wrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: var(--gap);
 }
 
-
-.alumni-logos img {
-    height: 36px;
-    max-width: 60px;
-    padding: 0px;
-    /* vertical-align: middle; */
+.header-box {
+  width: 280px;
+  background: var(--green-dark);
+  color: var(--text-on-green);
+  border-radius: 6px;
+  padding: 28px 20px 24px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
 }
 
-.my-centered {
-    margin-left: auto;
-    margin-right: auto;
+.header-box::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 18px,
+    rgba(255,255,255,0.03) 18px,
+    rgba(255,255,255,0.03) 19px
+  );
 }
 
-.my-container {
-    width: 280px;
-    margin: 20px auto;
+.header-box h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.75rem;
+  letter-spacing: 0.01em;
+  position: relative;
 }
 
-
-.my-tile-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 20px;
-    margin: 20px auto;
-    padding: 10px;
-    max-width: 1200px;
+.header-box p {
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--green-light);
+  margin-top: 6px;
+  position: relative;
 }
 
-.my-tile {
-    width: 350px;
-    box-sizing: border-box;
-    margin: 0;
+/* ── GRID ── */
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap);
+  justify-content: center;
+  max-width: calc(var(--box-w) * var(--max-cols) + var(--gap) * (var(--max-cols) - 1));
+  margin: 0 auto;
 }
 
-.my-tile img {
-    width: 100%;
-    height: auto;
-    display: block;
-    margin-bottom: 16px;
-    border-radius: 5px;
+/* ── CARD ── */
+.card {
+  width: var(--box-w);
+  background: var(--green-pale);
+  border: 2px solid var(--green-light);
+  border-radius: 6px;
+  padding: 24px 20px 20px;
+  position: relative;
+  transition: box-shadow 0.2s, transform 0.2s;
+  cursor: default;
+  flex-shrink: 0;
 }
 
-
-.my-card {
-    background-color: #9eada1;
-    padding: 30px;
-    font-family: 'Gabarito', sans-serif;
-    border-radius: 5px;
+.card:hover {
+  box-shadow: 0 6px 24px rgba(45, 106, 79, 0.18);
+  transform: translateY(-2px);
 }
 
-.my-name {
-    margin-top: 5px;
-    margin-bottom: 5px;
+/* expanded state */
+.card.expanded {
+  width: calc(var(--box-w) * var(--max-cols) + var(--gap) * (var(--max-cols) - 1));
+  max-width: 100%;
+  background: var(--green-mid);
+  border-color: var(--green-dark);
+  color: var(--text-on-green);
+  transform: none;
 }
 
-.my-blurb {
-    margin-top: 5px;
-    margin-bottom: 10px;
+.card.expanded .card-tag { color: var(--green-light); }
+.card.expanded .card-body { color: rgba(240,250,243,0.88); }
+.card.expanded .expand-btn { background: rgba(0,0,0,0.25); color: var(--green-pale); }
+.card.expanded .expand-btn:hover { background: rgba(0,0,0,0.4); }
+
+.card-tag {
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--green-bright);
+  margin-bottom: 10px;
 }
 
-
-
-/* Custom class for styled links (not buttons) */
-.my-link,
-.my-link:visited,
-.my-link:active {
-    color: #000 !important;
-    text-decoration: underline !important;
-    font-weight: bold !important;
+.card h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.2rem;
+  color: var(--green-dark);
+  margin-bottom: 10px;
+  line-height: 1.25;
 }
 
-.my-link:hover,
-.my-link:focus {
-    color: #000 !important;
-    text-decoration: underline !important;
-    font-weight: bold !important;
+.card.expanded h2 { color: var(--text-on-green); }
+
+.card-body {
+  font-size: 0.8rem;
+  line-height: 1.7;
+  color: #2a4a38;
 }
 
-.portal {
-    font-size: 32px;
+/* ── EXPAND BUTTON ── */
+.expand-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 4px;
+  background: rgba(45,106,79,0.12);
+  color: var(--green-dark);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s, color 0.15s;
+  flex-shrink: 0;
 }
 
+.expand-btn:hover { background: rgba(45,106,79,0.22); }
+
+.expand-btn svg { width: 14px; height: 14px; }
+
+/* Hide expand button when screen is too narrow to support 3 cols */
+@media (max-width: calc(350px * 2 + 20px * 2 + 32px)) {
+  .expand-btn { display: none; }
+}
+
+/* ── DIVIDER LINE ── */
+.divider {
+  width: 36px;
+  height: 2px;
+  background: var(--green-light);
+  margin: 10px 0 14px;
+  border-radius: 2px;
+}
+.card.expanded .divider { background: rgba(255,255,255,0.3); }
