@@ -52,11 +52,69 @@ body {
   );
 }
 
+.header-avatar {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--green-light);
+  margin-bottom: 14px;
+  position: relative;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.header-links {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 14px;
+  position: relative;
+}
+
+.header-links a {
+  color: var(--green-light);
+  display: flex;
+  align-items: center;
+  transition: color 0.15s;
+}
+
+.header-links a:hover { color: var(--white); }
+
+.header-links svg { width: 18px; height: 18px; }
+
+.header-links-dot {
+  color: var(--green-light);
+  opacity: 0.6;
+}
+
+.header-links img {
+  height: 20px;
+  width: auto;
+  opacity: 0.85;
+  transition: opacity 0.15s;
+}
+
+.header-links img:hover { opacity: 1; }
+
 .header-box h1 {
   font-family: 'DM Serif Display', serif;
   font-size: 1.75rem;
   letter-spacing: 0.01em;
   position: relative;
+}
+
+.header-box p a {
+  color: var(--green-light);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(183, 228, 199, 0.4);
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.header-box p a:hover {
+  color: var(--white);
+  border-color: var(--white);
 }
 
 .header-box p {
