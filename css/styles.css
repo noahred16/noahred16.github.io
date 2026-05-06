@@ -233,6 +233,8 @@ body {
 }
 
 /* ── EXPAND BUTTON ── */
+.expand-btn:focus { outline: none; }
+
 .expand-btn {
   position: absolute;
   top: 12px;
@@ -280,7 +282,7 @@ body {
   align-items: center;
   justify-content: space-between;
   background: #ccd6d0;
-  margin: -24px -20px 16px;
+  margin: -24px -20px 0;
   padding: 8px 8px 8px 14px;
 }
 
@@ -315,10 +317,13 @@ body {
 }
 
 /* ── PROCESSING CANVAS ── */
+.card-body:has(canvas) {
+  margin: 0 -20px -20px;
+}
+
 .card canvas {
   display: block;
   width: 100%;
   height: auto;
-  border-radius: 4px;
   outline: none;
 }
