@@ -193,6 +193,45 @@ body {
   color: #2a4a38;
 }
 
+.card-body p + p { margin-top: 8px; }
+
+.card-body ul {
+  margin-top: 10px;
+  padding-left: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.card-body a {
+  color: var(--green-mid);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(45, 106, 79, 0.3);
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.card-body a:hover {
+  color: var(--green-dark);
+  border-color: var(--green-dark);
+}
+
+.card-img {
+  display: block;
+  width: 100%;
+  border-radius: 4px;
+  margin-top: 14px;
+}
+
+.card.expanded .card-body a {
+  color: var(--green-light);
+  border-color: rgba(183, 228, 199, 0.4);
+}
+
+.card.expanded .card-body a:hover {
+  color: var(--white);
+  border-color: var(--white);
+}
+
 /* ── EXPAND BUTTON ── */
 .expand-btn {
   position: absolute;
