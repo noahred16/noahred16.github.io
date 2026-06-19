@@ -1,9 +1,8 @@
-
 # To add to server
 # curl -O https://raw.githubusercontent.com/noahred16/noahred16.github.io/main/.bash_profile
 # echo 'source ~/.bash_profile' >> ~/.bashrc
 # curl -fsSL https://claude.ai/install.sh | bash
-
+# git config --global user.name "Noah Smith" && git config --global user.email "nosmith16@gmail.com"
 
 # include bash profile
 # if [ -f ~/.bash_profile ]; then
