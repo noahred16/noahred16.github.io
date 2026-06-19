@@ -1,3 +1,10 @@
+
+# To add to server
+# curl -O https://raw.githubusercontent.com/noahred16/noahred16.github.io/main/.bash_profile
+# echo 'source ~/.bash_profile' >> ~/.bashrc
+# curl -fsSL https://claude.ai/install.sh | bash
+
+
 # include bash profile
 # if [ -f ~/.bash_profile ]; then
 #     . ~/.bash_profile
