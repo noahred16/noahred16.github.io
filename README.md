@@ -12,5 +12,6 @@ cd noahred16.github.io && ./setup.sh
 
 ## Tools
 ```bash
+./tools.sh
 curl -fsSL https://claude.ai/install.sh | bash
 ```
