@@ -62,10 +62,14 @@ PERMA_HISTORY=(
     "git commit --amend --no-edit"
     "git reset --soft HEAD~1"
     "tmux attach -t claude"
-    "tmux attach -t pente"
     "tmux new -s claude"
     "tmux new -s pente"
     "tmux ls"
+    "tmux attach -t pente"
+    "cd ~/repos/web_scrape && bash print_output.sh"
+    "source ~/.venvs/py312/bin/activate"
+    "pip install --upgrade pip"
+    "pip install torch --index-url https://download.pytorch.org/whl/cpu"
 )
 
 for cmd in "${PERMA_HISTORY[@]}"; do
