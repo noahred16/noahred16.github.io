@@ -6,6 +6,7 @@ filetype plugin indent on
 set number          " Show line numbers
 set cursorline      " Highlight the line the cursor is on
 set wildmenu        " Visual autocomplete menu for command mode
+set relativenumber
 
 " Tabs and Indentation
 set tabstop=4       " Show existing tabs as 4 spaces
@@ -21,4 +22,10 @@ set smartcase       " ...unless search contains a capital letter
 
 " Performance
 set ttyfast         " Speed up screen redrawing
+
+" Return to last edit position when opening files
+autocmd BufReadPost *
+  \ if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit'
+  \ |   exe "normal! g`\""
+  \ | endif
 
