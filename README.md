@@ -14,4 +14,5 @@ cd noahred16.github.io && ./setup.sh
 ```bash
 ./tools.sh
 curl -fsSL https://claude.ai/install.sh | bash
+curl -LsSf https://hf.co/cli/install.sh | bash
 ```
