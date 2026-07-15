@@ -31,10 +31,4 @@ for file in "${DOTFILES[@]}"; do
     link "$SCRIPT_DIR/$file" "$HOME/$file"
 done
 
-# Make sure .bashrc sources .bash_profile so login settings apply to interactive shells
-if ! grep -qs 'source ~/.bash_profile' "$HOME/.bashrc" 2>/dev/null; then
-    echo 'source ~/.bash_profile' >> "$HOME/.bashrc"
-    echo "Added 'source ~/.bash_profile' to $HOME/.bashrc"
-fi
-
 echo "Setup complete."
