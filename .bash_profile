@@ -1,13 +1,12 @@
-# To add to server
-# curl -O https://raw.githubusercontent.com/noahred16/noahred16.github.io/main/.bash_profile
-# echo 'source ~/.bash_profile' >> ~/.bashrc
-# curl -fsSL https://claude.ai/install.sh | bash
-# git config --global user.name "Noah Smith" && git config --global user.email "nosmith16@gmail.com"
+# If .bashrc exists, pull it into this shell session
+if [ -f ~/.bashrc ]; then
+    source ~/.bashrc
+fi
 
-# include bash profile
-# if [ -f ~/.bash_profile ]; then
-#     . ~/.bash_profile
-# fi
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/.local/bin" ] ; then
+    PATH="$HOME/.local/bin:$PATH"
+fi
 
 # Profile settings
 bind '"\e[A": history-search-backward'
@@ -67,9 +66,11 @@ PERMA_HISTORY=(
     "tmux ls"
     "tmux attach -t pente"
     "cd ~/repos/web_scrape && bash print_output.sh"
+    "python -m venv ~/.venvs/py312"
     "source ~/.venvs/py312/bin/activate"
     "pip install --upgrade pip"
     "pip install torch --index-url https://download.pytorch.org/whl/cpu"
+    "pip install numpy"
 )
 
 for cmd in "${PERMA_HISTORY[@]}"; do
@@ -78,6 +79,7 @@ done
 
 
 # Aliases
+alias ask='claude -p'
 alias python='python3'
 alias pip='pip3'
 alias gs='git status'
