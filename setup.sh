@@ -31,4 +31,14 @@ for file in "${DOTFILES[@]}"; do
     link "$SCRIPT_DIR/$file" "$HOME/$file"
 done
 
+mkdir -p "$HOME/.claude"
+CLAUDE_FILES=(
+    CLAUDE.md
+    keybindings.json
+)
+
+for file in "${CLAUDE_FILES[@]}"; do
+    link "$SCRIPT_DIR/claude/$file" "$HOME/.claude/$file"
+done
+
 echo "Setup complete."
