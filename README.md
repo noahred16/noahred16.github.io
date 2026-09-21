@@ -10,6 +10,15 @@ mkdir -p ~/repos && cd ~/repos && git clone git@github.com:noahred16/noahred16.g
 cd noahred16.github.io && ./setup.sh
 ```
 
+## Run over Tailscale
+```bash
+docker compose up -d
+docker compose down
+```
+Live at [http://100.108.225.5:8081](http://100.108.225.5:8081) from any device on the tailnet.
+
+Override the bind address or port with `TAILSCALE_IP` / `SITE_PORT` in a `.env` file.
+
 ## Tools
 ```bash
 ./tools.sh
