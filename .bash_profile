@@ -8,11 +8,6 @@ if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
-# Profile settings
-bind '"\e[A": history-search-backward'
-bind '"\e[B": history-search-forward'
-
-
 #
 # Start ssh-agent if not already running OR if we can't connect to it
 if ! ssh-add -l &>/dev/null; then

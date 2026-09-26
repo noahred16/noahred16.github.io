@@ -25,6 +25,7 @@ DOTFILES=(
     .bash_profile
     .vimrc
     .gitconfig
+    .inputrc
 )
 
 for file in "${DOTFILES[@]}"; do

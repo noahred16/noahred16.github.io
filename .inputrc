@@ -1,0 +1,7 @@
+$include /etc/inputrc
+
+# Up/Down search history by the prefix already typed
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+"\eOA": history-search-backward
+"\eOB": history-search-forward
