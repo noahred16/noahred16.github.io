@@ -13,6 +13,7 @@ TOOLS=(
     jq
     tree
     ncdu
+    bat
 )
 
 # Package name overrides for macOS (Homebrew), keyed by the apt name above

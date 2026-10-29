@@ -78,6 +78,7 @@ alias ask='claude -p'
 alias python='python3'
 alias pip='pip3'
 alias gs='git status'
+alias cat="batcat --style=plain"
 alias f='file=$(fzf); [ -n "$file" ] && code "$file" && echo "Opening $file"'
 alias vf='file=$(fzf); [ -n "$file" ] && vim "$file" && echo "Opening $file"'
 alias sl='ls'
