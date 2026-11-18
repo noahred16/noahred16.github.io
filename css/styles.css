@@ -327,3 +327,28 @@ body {
   height: auto;
   outline: none;
 }
+
+/* ── EVENT CARDS (birthdays, anniversaries, ...) ── */
+.card-event {
+  background: linear-gradient(135deg, #fff4e6 0%, #ffe3ec 100%);
+  border-color: #f4b6c2;
+}
+
+.card-event .card-tag { color: #c2185b; }
+.card-event h2 { color: #6a1b3a; }
+.card-event .divider { background: #f4b6c2; }
+.card-event .card-body { color: #5a2a3a; font-size: 0.85rem; }
+.card-event .card-body p:first-child {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.05rem;
+  color: #6a1b3a;
+}
+
+.card-event--anniversary {
+  background: linear-gradient(135deg, #fdf6e3 0%, #f3e5f5 100%);
+  border-color: #d1b3e0;
+}
+
+.card-event.is-today {
+  box-shadow: 0 0 0 3px rgba(244, 182, 194, 0.6), 0 6px 24px rgba(194, 24, 91, 0.18);
+}
