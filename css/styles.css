@@ -328,9 +328,23 @@ body {
   outline: none;
 }
 
+/* ── ITALY CARD (matches italy/styles.css) ── */
+.card-italy {
+  background: #f5ead8;   /* --color-bg on the Italy page */
+  border-color: #dcd3c4; /* --color-neutral-300 on the Italy page */
+}
+
+/* dark oranges from the Italy page's --color-accent-* scale */
+.card-italy .card-tag { color: #b2622d; }
+.card-italy h2 { color: #8c491a; }
+.card-italy .divider { background: #f6a06b; }
+.card-italy .card-body { color: #643312; }
+.card-italy .card-body a { color: #b2622d; border-color: rgba(178, 98, 45, 0.35); }
+.card-italy .card-body a:hover { color: #8c491a; border-color: #8c491a; }
+
 /* ── EVENT CARDS (birthdays, anniversaries, ...) ── */
 .card-event {
-  background: linear-gradient(135deg, #fff4e6 0%, #ffe3ec 100%);
+  background: #ffe3ec;   /* same as backgroundColor in processing/flowers.pde */
   border-color: #f4b6c2;
 }
 
@@ -345,10 +359,20 @@ body {
 }
 
 .card-event--anniversary {
-  background: linear-gradient(135deg, #fdf6e3 0%, #f3e5f5 100%);
+  background: #f3e5f5;
   border-color: #d1b3e0;
 }
 
 .card-event.is-today {
   box-shadow: 0 0 0 3px rgba(244, 182, 194, 0.6), 0 6px 24px rgba(194, 24, 91, 0.18);
+}
+
+.card-event-sketch {
+  margin: 16px -20px -20px;
+}
+
+.card-event-sketch canvas {
+  display: block;
+  width: 100%;
+  height: auto;
 }

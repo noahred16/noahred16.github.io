@@ -58,6 +58,13 @@ function findActiveOccurrence(event, today) {
   return null;
 }
 
+/** @param {number} n @returns {string} e.g. 1 → '1st', 22 → '22nd', 27 → '27th', 111 → '111th' */
+function toOrdinal(n) {
+  const lastTwo = n % 100;
+  if (lastTwo >= 11 && lastTwo <= 13) return `${n}th`;
+  return n + ({ 1: 'st', 2: 'nd', 3: 'rd' }[n % 10] || 'th');
+}
+
 /** @param {number} daysUntil @returns {string} */
 function describeWhen(daysUntil) {
   if (daysUntil === 0) return 'today';
@@ -74,9 +81,11 @@ function describeWhen(daysUntil) {
  */
 function buildProps(event, occurrence, today) {
   const daysUntil = daysBetween(today, occurrence);
+  const age = occurrence.getFullYear() - parseDate(event.date).getFullYear();
   return {
     name: event.name,
-    age: occurrence.getFullYear() - parseDate(event.date).getFullYear(),
+    age,
+    ageOrdinal: toOrdinal(age),
     days: Math.abs(daysUntil),
     daysUntil,
     isToday: daysUntil === 0,
@@ -128,7 +137,29 @@ function renderEventCard({ event, props }) {
   });
 
   card.append(tag, title, divider, body);
+  if (event.sketch) card.appendChild(renderSketch(event.sketch));
   return card;
+}
+
+/** @param {string} source .pde path @returns {HTMLElement} */
+function renderSketch(source) {
+  const wrap = document.createElement('div');
+  wrap.className = 'card-event-sketch';
+  const canvas = document.createElement('canvas');
+  canvas.setAttribute('data-processing-sources', source);
+  wrap.appendChild(canvas);
+  return wrap;
+}
+
+/**
+ * Removes every Processing card from the grid so only the spotlighted event's sketch runs.
+ * Must run before DOMContentLoaded, when processing.js starts every sketch canvas it finds.
+ * @param {HTMLElement} grid
+ */
+function removeSketchCards(grid) {
+  grid.querySelectorAll('.card').forEach(card => {
+    if (card.querySelector('canvas[data-processing-sources]')) card.remove();
+  });
 }
 
 /** @returns {Date} ?date=YYYY-MM-DD override, else now */
@@ -140,8 +171,9 @@ function resolveToday() {
 function mountEventCards() {
   const grid = document.getElementById('grid');
   if (!grid || typeof EVENTS === 'undefined') return;
-  const cards = getActiveEvents(EVENTS, resolveToday()).map(renderEventCard);
-  grid.prepend(...cards);
+  const active = getActiveEvents(EVENTS, resolveToday());
+  if (active.some(({ event }) => event.spotlight)) removeSketchCards(grid);
+  grid.prepend(...active.map(renderEventCard));
 }
 
 if (typeof module !== 'undefined') {

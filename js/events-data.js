@@ -12,9 +12,12 @@
  *               Recurring: 'MM-DD' (year-relative, may wrap around New Year).
  *               One-off:   'YYYY-MM-DD'.
  *   message     (props) => string | string[]   Each string becomes a paragraph.
+ *   sketch      (optional) Processing sketch path to show inside the card.
+ *   spotlight   (optional) true → while this card shows, the other Processing
+ *               cards are removed from the page so only this card's sketch runs.
  *
  * Props passed to message():
- *   name, age (years since `date` as of this occurrence), days (absolute days
+ *   name, age (years since `date` as of this occurrence), ageOrdinal ('27th'), days (absolute days
  *   to/from the date), daysUntil (signed), isToday, isPast, isFuture,
  *   date ('Nov 22'), when ('in 5 days' | 'today' | '3 days ago').
  *
@@ -40,9 +43,11 @@ const EVENTS = [
     date: '1999-11-22',
     start_date: '11-01',
     end_date: '11-30',
-    message: ({ age, when, isToday }) => [
-      'Happy Birthday my love! I love you forever.',
-      isToday ? `${age} years young today :)` : `${age} years young :) ${when}`,
+    message: ({ ageOrdinal }) => [
+      `Happy ${ageOrdinal} Birthday <3`,
+      'I love you forever sweet pea.',
     ],
+    sketch: 'processing/flowers.pde',
+    spotlight: true,
   },
 ];
