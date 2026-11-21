@@ -593,7 +593,7 @@ function endTile() {
   back.className = 'btn btn-primary';
   back.textContent = '\u2190 Back to the map';
   back.addEventListener('click', () => go(null));
-  panel.append(title, msg, back);
+  panel.append(back);
   TRIPS.filter(t => t.id !== selected).forEach(t => {
     const b = document.createElement('button');
     b.className = 'btn btn-secondary';
