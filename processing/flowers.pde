@@ -8,7 +8,7 @@
 int flowerCount = 12;
 float ringRadius = 25;                // flowers stand evenly on a circle this wide, centered at the bottom of the scene
 float minStemHeight = 90;
-float maxStemHeight = 170;
+float maxStemHeight = 150;
 float minLean = radians(12);          // each flower tips outward from the ring by a random amount in this range
 float maxLean = radians(20);
 float leanJitter = radians(20);       // random wiggle on the lean direction so they don't all fan out perfectly
@@ -17,7 +17,8 @@ float headTiltJitter = radians(12);   // random +/- on how far each head nods (o
 float headNodJitter = radians(45);    // random +/- on which way each head nods (0 = always straight outward)
 float branchTiltJitter = radians(15); // random +/- on each branch's tilt (on top of branchTilt)
 float branchSpinJitter = radians(25); // random +/- on each branch's twist around the stem
-int seed = 47;                         // change for a different (but repeatable) arrangement
+float pinkChance = 0.5;               // chance each flower is a pink one instead of a white one (0-1)
+int seed = 1;                         // change for a different (but repeatable) arrangement
 
 // variables for the background
 color backgroundColor = color(255, 227, 236);   // #ffe3ec, matches the birthday card (css/styles.css)
@@ -56,12 +57,12 @@ float leafWidth = 6;                  // half-width at the widest point
 float leafCurl = radians(35);         // tips the leaf out of the branch's plane so it reads as 3D
 int leafDetail = 8;                   // points along each side of the leaf: higher = smoother curve
 
-// variables for the flower head
+// variables for the flower head (shared by both kinds; the petal sizes below are the white flower's)
 int petalCount = 6;
-float petalLength = 30;
-float petalWidth = 8;                 // half-width at the widest point
+float petalLength = 22;
+float petalWidth = 7;                 // half-width at the widest point
 float headTilt = radians(20);         // extra outward tip of the flower head on top of the stem's lean
-float petalOpen = radians(70);        // 0 = petals straight up (closed bud), 90 = flat open
+float petalOpen = radians(85);        // 0 = petals straight up (closed bud), 90 = flat open
 float centerSize = 6;                 // radius of the yellow middle
 float centerDrop = 4;                 // how far the yellow middle sits below the top of the stem
 float petalCup = 4;                   // how deep each petal dips in the middle (spoon/bowl shape)
@@ -74,20 +75,31 @@ float petalBaseDrop = stemJoinDepth / sin(petalOpen);
 float collarRadius = centerSize * 1.2;
 float collarSquash = 0.75;            // collar height relative to its width (1 = round ball, 0 = flat disc)
 float collarDepth = stemJoinDepth-2;    // sits where the stem pokes out of the bottom of the yellow center
-float petalShadeDepth = 95;           // how much darker the petal's edges and base are than its middle (0 = flat white)
+float petalShadeDepth = 95;           // how much darker the petal's edges and base are than its middle (0 = flat color)
 int petalDetail = 12;                 // mesh resolution: higher = smoother curves
+color whitePetalColor = color(255);
+
+// variables for the pink flower: smaller petals, more of them, in two rows
+int pinkPetalCount = 10;              // petals in each row
+float pinkPetalLength = 20;
+float pinkPetalWidth = 5;             // half-width at the widest point
+float pinkInnerScale = 0.75;          // inner row's petal size relative to the outer row
+float pinkInnerOpen = radians(-20);   // inner row's openness relative to the outer row: negative = more upright
+color pinkOuterColor = color(240, 120, 165);
+color pinkInnerColor = color(225, 90, 145);
+int pinkPetalDetail = 8;              // lower than petalDetail: the petals are small, and there are twice as many rows
 
 Flower[] flowers;
-PVector[][] petalMesh;                // one petal's grid of points, built once in setup() and reused for every petal
-float[][] petalShades;                // brightness at each mesh point, standing in for real lighting (see beginUnlit())
+Bloom whiteBloom;                     // the two kinds of flower head, built once in setup()
+Bloom pinkBloom;
 
 
 void setup() {
   size(290, 290, P3D);
   frameRate(30);
-  petalMesh = createPetalMesh();
-  petalShades = createPetalShades();
-  flowers = createFlowers();
+  whiteBloom = createWhiteBloom();
+  pinkBloom = createPinkBloom();
+  flowers = createFlowers();   // after the blooms: each flower picks one
 }
 
 void draw() {
@@ -169,62 +181,30 @@ Flower[] createFlowers() {
 }
 
 
-/**
- * Petal mesh, built once in setup(): a curved white oval "spoon" pointing "up" (-y)
- * whose base tucks under the flower's center. It's a grid of points: rows go base -> tip,
- * columns go edge -> edge. Local +z is the petal's underside.
- * (Stored as points rather than a PShape because processing.js has no createShape().)
- */
-PVector[][] createPetalMesh() {
-  PVector[][] mesh = new PVector[petalDetail + 1][petalDetail + 1];
-  for (int row = 0; row <= petalDetail; row++) {
-    for (int col = 0; col <= petalDetail; col++) {
-      mesh[row][col] = petalPoint(row / (float) petalDetail, map(col, 0, petalDetail, -1, 1));
-    }
-  }
-  return mesh;
+// white flower: one row of big white petals
+Bloom createWhiteBloom() {
+  PetalRing[] rings = new PetalRing[1];
+  rings[0] = new PetalRing(petalCount, petalLength, petalWidth, whitePetalColor, 0, 0, petalDetail);
+  return new Bloom(rings, whitePetalColor);
 }
 
-// baked-in shading: bright down the middle, a little darker toward the edges and the base,
-// so the white petals don't disappear against the white background when drawn unlit
-float[][] createPetalShades() {
-  float[][] shades = new float[petalDetail + 1][petalDetail + 1];
-  for (int row = 0; row <= petalDetail; row++) {
-    for (int col = 0; col <= petalDetail; col++) {
-      float t = row / (float) petalDetail;
-      float s = map(col, 0, petalDetail, -1, 1);
-      shades[row][col] = 255 - petalShadeDepth * (0.6 * s * s + 0.4 * sq(1 - t));
-    }
-  }
-  return shades;
+// pink flower: an outer row of small pink petals, and a smaller, more upright, darker inner row
+// turned half a petal so its petals peek out between the outer ones
+Bloom createPinkBloom() {
+  PetalRing[] rings = new PetalRing[2];
+  rings[0] = new PetalRing(pinkPetalCount, pinkPetalLength, pinkPetalWidth, pinkOuterColor,
+                           0, 0, pinkPetalDetail);
+  rings[1] = new PetalRing(pinkPetalCount, pinkPetalLength * pinkInnerScale, pinkPetalWidth * pinkInnerScale,
+                           pinkInnerColor, pinkInnerOpen, PI / pinkPetalCount, pinkPetalDetail);
+  return new Bloom(rings, pinkOuterColor);
 }
 
-// draws the petal mesh as quads between neighboring grid points
-void drawPetalMesh() {
-  noStroke();
-  beginShape(QUADS);
-  for (int row = 0; row < petalDetail; row++) {
-    for (int col = 0; col < petalDetail; col++) {
-      petalVertex(row, col);
-      petalVertex(row + 1, col);
-      petalVertex(row + 1, col + 1);
-      petalVertex(row, col + 1);
-    }
-  }
-  endShape();
-}
-
-void petalVertex(int row, int col) {
-  PVector p = petalMesh[row][col];
-  fill(petalShades[row][col]);
-  vertex(p.x, p.y, p.z);
-}
-
-// a point on the petal surface.
+// a point on a petal's surface, for a petal of the given length and half-width.
 // t: 0 at the base, 1 at the tip.  s: -1 at one edge, 0 down the middle, +1 at the other edge.
-PVector petalPoint(float t, float s) {
+// The petal points "up" (-y) and its base tucks under the flower's center; local +z is its underside.
+PVector petalPoint(float t, float s, float len, float maxHalfWidth) {
   // oval outline: wide-ish at the base so neighbors overlap, widest past the middle, closing at the tip
-  float halfWidth = petalWidth * pow(sin(PI * lerp(0.2, 1, t)), 0.7);
+  float halfWidth = maxHalfWidth * pow(sin(PI * lerp(0.2, 1, t)), 0.7);
 
   // base starts below the center and curves up into the petal, forming the bowl under the bulb
   float baseDrop = petalBaseDrop * sq(1 - t);
@@ -232,7 +212,97 @@ PVector petalPoint(float t, float s) {
   // spoon shape: the middle of the petal dips lower than its edges
   float cup = petalCup * (1 - s * s) * sin(PI * t);
 
-  return new PVector(s * halfWidth, -petalLength * t, baseDrop + cup);
+  return new PVector(s * halfWidth, -len * t, baseDrop + cup);
+}
+
+// baked-in shading: the petal's color down the middle, a little darker toward the edges and the base,
+// standing in for real lighting (petals are drawn unlit, see beginUnlit())
+color petalShade(color petalColor, float t, float s) {
+  float darken = petalShadeDepth * (0.6 * s * s + 0.4 * sq(1 - t)) / 255;
+  return lerpColor(petalColor, color(0), darken);
+}
+
+
+/**
+ * PetalRing: one ring of identical petals around the flower's center.
+ * Its petal mesh (a grid of points, rows base -> tip, columns edge -> edge) and the shading at
+ * each point are built once and reused for every petal of every flower with this ring.
+ * (Stored as points rather than a PShape because processing.js has no createShape().)
+ */
+class PetalRing {
+  int count;             // petals around the ring
+  float openOffset;      // added to the flower's petal openness (negative = more upright)
+  float twist;           // turns the whole ring around the center
+  int detail;            // mesh resolution
+  PVector[][] mesh;
+  color[][] shades;
+
+  PetalRing(int count, float len, float halfWidth, color petalColor, float openOffset, float twist, int detail) {
+    this.count = count;
+    this.openOffset = openOffset;
+    this.twist = twist;
+    this.detail = detail;
+
+    mesh = new PVector[detail + 1][detail + 1];
+    shades = new color[detail + 1][detail + 1];
+    for (int row = 0; row <= detail; row++) {
+      for (int col = 0; col <= detail; col++) {
+        float t = row / (float) detail;
+        float s = map(col, 0, detail, -1, 1);
+        mesh[row][col] = petalPoint(t, s, len, halfWidth);
+        shades[row][col] = petalShade(petalColor, t, s);
+      }
+    }
+  }
+
+  // all the petals, spread evenly around the center. openAngle: 0 = closed bud, HALF_PI = flat open.
+  // Expects the origin at the top of the stem.
+  void draw(float openAngle) {
+    for (int i = 0; i < count; i++) {
+      pushMatrix();
+      rotateY(twist + i * TWO_PI / count);   // spread petals evenly around the stem
+      rotateZ(openAngle + openOffset);       // swing the petal down from vertical toward flat
+      rotateY(HALF_PI);                      // spin it on its long axis so its face points up
+      drawPetal();
+      popMatrix();
+    }
+  }
+
+  // the petal mesh as quads between neighboring grid points
+  void drawPetal() {
+    noStroke();
+    beginShape(QUADS);
+    for (int row = 0; row < detail; row++) {
+      for (int col = 0; col < detail; col++) {
+        petalVertex(row, col);
+        petalVertex(row + 1, col);
+        petalVertex(row + 1, col + 1);
+        petalVertex(row, col + 1);
+      }
+    }
+    endShape();
+  }
+
+  void petalVertex(int row, int col) {
+    PVector p = mesh[row][col];
+    fill(shades[row][col]);
+    vertex(p.x, p.y, p.z);
+  }
+}
+
+
+/**
+ * Bloom: one kind of flower head, its rings of petals (drawn outer first) and its collar color.
+ * The yellow center is the same for every kind.
+ */
+class Bloom {
+  PetalRing[] rings;
+  color collarColor;
+
+  Bloom(PetalRing[] rings, color collarColor) {
+    this.rings = rings;
+    this.collarColor = collarColor;
+  }
 }
 
 
@@ -286,7 +356,7 @@ void drawDisc(float r, float y) {
 
 
 /**
- * Flower: one flower, a stem with leafy branches and a white flower head.
+ * Flower: one flower, a stem with leafy branches and a flower head (white or pink, see Bloom).
  *
  * Each flower stores only what makes it different from the others (where it stands,
  * how tall it is, which way it leans and nods...), picked randomly once when it's created.
@@ -305,6 +375,7 @@ class Flower {
   float headTwist;       // turns the petals around the center so they don't all line up
   float[] branchTilts;   // each branch's lean away from the stem
   float[] branchSpins;   // each branch's twist around the stem
+  Bloom bloom;           // which kind of flower head
 
   // base: where it stands.  outwardAngle: the direction pointing away from the ring's center.
   // Uses random(), so call randomSeed() first for a repeatable garden.
@@ -319,7 +390,7 @@ class Flower {
 
     headTiltAngle = jitter(headTilt, headTiltJitter);
     headNod = random(-headNodJitter, headNodJitter);
-    headTwist = random(TWO_PI / petalCount);    // petals repeat every TWO_PI / petalCount
+    headTwist = random(TWO_PI);
 
     branchTilts = new float[branchCount];
     branchSpins = new float[branchCount];
@@ -327,6 +398,8 @@ class Flower {
       branchTilts[i] = jitter(branchTilt, branchTiltJitter);
       branchSpins[i] = jitter(i * branchSpin, branchSpinJitter);
     }
+
+    bloom = random(1) < pinkChance ? pinkBloom : whiteBloom;
   }
   void draw() {
     pushMatrix();
@@ -405,16 +478,11 @@ class Flower {
 
   // ---- flower head -----------------------------------------------------
 
-  // petals arranged evenly around a yellow center. Expects the origin at the top of the stem.
+  // the bloom's rings of petals around a yellow center. Expects the origin at the top of the stem.
   void drawFlowerHead() {
     beginUnlit();
-    for (int i = 0; i < petalCount; i++) {
-      pushMatrix();
-      rotateY(i * TWO_PI / petalCount);   // spread petals evenly around the stem
-      rotateZ(petalOpenAngle);            // swing the petal down from vertical toward flat
-      rotateY(HALF_PI);                   // spin it on its long axis so its face points up
-      drawPetal();
-      popMatrix();
+    for (PetalRing ring : bloom.rings) {
+      ring.draw(petalOpenAngle);
     }
 
     // also unlit: lit, the top of the center faces away from the light and goes a dull olive green
@@ -426,19 +494,15 @@ class Flower {
     popMatrix();
     endUnlit();
 
-    // white squashed sphere where the stem meets the head, covering any gap between the petal bases
+    // squashed sphere where the stem meets the head, covering any gap between the petal bases
     // and the center. Lit (sphere() has normals), so it shades and has depth from the side.
-    fill(255);
+    fill(bloom.collarColor);
     noStroke();
     pushMatrix();
     translate(0, collarDepth, 0);
     scale(1, collarSquash, 1);
     sphere(collarRadius);
     popMatrix();
-  }
-
-  void drawPetal() {
-    drawPetalMesh();
   }
 
   // flat almond shape from the origin to (0, -len), filled as a triangle fan around its middle.
